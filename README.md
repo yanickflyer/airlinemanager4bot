@@ -17,7 +17,7 @@ Sign in to AM4 account.
 Open your browser's DEV tool. The Standard is the F12 Key on your keyboard.
 Go to the Network Tab and hit Ctrl + R
 
-<img src="https://raw.githubusercontent.com/yanickflyer/airlinemanager4bot/master/img/phpsess.png" width="100px">
+<img src="https://raw.githubusercontent.com/yanickflyer/airlinemanager4bot/master/img/phpsess.png" width="1000px">
 
 Then either use `docker-compose up -d` to spin a docker container and that's it.
 Or use install python on your machine and use requirements.txt to install the modules.
