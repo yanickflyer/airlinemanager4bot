@@ -1,0 +1,11 @@
+version: '3.9'
+
+services:
+  bot:
+    build: .
+    entrypoint: ["python", "-u", "main.py"]
+    volumes:
+      - ./src:/src
+    working_dir: /src
+    env_file:
+      - .env
