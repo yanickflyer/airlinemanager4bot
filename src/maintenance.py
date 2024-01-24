@@ -31,7 +31,7 @@ class maintenance:
                 "Type":str(air.attrs['data-type']).upper(),
                 "id":get_id
             }
-            maintenance.AircraftCheck(js_data=js_data,retry=1)
+            # maintenance.AircraftCheck(js_data=js_data,retry=1)
     
     def AircraftCheck(js_data,retry):
         page="maint_plan_do.php"

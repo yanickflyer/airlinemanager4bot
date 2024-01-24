@@ -13,23 +13,23 @@ class actions:
             current=current.lstrip("$ ").replace(",","")
             holding=holding.replace(",","")
             if (int(current)<=650 and int(current)>450):
-                purchase="100000"
+                purchase="250000"
                 parameter={
                     "mode":"do",
                     "amount":purchase
                 }
                 resp=requests.post(auth.url+page, cookies=auth.session, params=parameter)
                 price=int(purchase)*(int(current)/1000)
-                print('Purchased 100000lbs for $'+str(price))
+                print('Purchased 250000lbs for $'+str(price))
             elif (int(current)<=450):
-                purchase="350000"
+                purchase="500000"
                 parameter={
                     "mode":"do",
                     "amount":purchase
                 }
                 resp=requests.post(auth.url+page, cookies=auth.session, params=parameter)
                 price=int(purchase)*(int(current)/1000)
-                print('Purchased 350000lbs for $'+str(price))
+                print('Purchased 500000lbs for $'+str(price))
             else:
                 print("Fuel too expensive $"+current+"/1000lbs")
         except requests:
