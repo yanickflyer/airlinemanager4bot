@@ -21,10 +21,6 @@ class maintenance:
             get_id=air.find("button").attrs['onclick']
             get_id=re.search(r'id=[0-9]+',get_id).group()
             get_id=get_id.lstrip('id=')
-            try:
-                wear = air.find_all("b",{"class","text-danger"})[0].string
-            except:
-                wear = air.find_all("b",{"class","text-success"})[1].string
             js_data = {
                 "Flight Hours":air.find("b").string,
                 "Hours to Check":air.find_all("b")[1].string,
@@ -34,12 +30,12 @@ class maintenance:
                 "Type":str(air.attrs['data-type']).upper(),
                 "id":get_id
             }
-            # maintenance.AircraftCheck(js_data=js_data,retry=1)
+            maintenance.AircraftCheck(js_data=js_data,retry=1)
     
     def AircraftCheck(js_data,retry):
         page="maint_plan_do.php"
         if js_data["Status"] == "At base":
-            if int(js_data["Flight Hours"]) > int(js_data["Hours to Check"]):
+            if int(int(js_data["Hours to Check"] < 30)):
                 parameter={
                     "mode":"do",
                     "type":"check",
@@ -52,14 +48,14 @@ class maintenance:
                     return
                 print("A Check Scheduled for "+js_data["Reg"]+" "+js_data["Type"])
                 return
-        # wear=js_data["Wear"]
-        # wear=float(wear.replace("%",""))
-        # if (wear) >= 30.0:
-        #     parameter={
-        #             "mode":"do",
-        #             "type":"repair",
-        #             "id":js_data["id"]
-        #     }
+        wear=js_data["Wear"]
+        wear=float(wear.replace("%",""))
+        if (wear) >= 30.0:
+            parameter={
+                    "mode":"do",
+                    "type":"repair",
+                    "id":js_data["id"]
+            }
             
-        #     requests.post(auth.url+page,cookies=auth.session,params=parameter)
-        #     print("Maintenance Scheduled for "+js_data["Reg"]+" "+js_data["Type"])
+            requests.post(auth.url+page,cookies=auth.session,params=parameter)
+            print("Maintenance Scheduled for "+js_data["Reg"]+" "+js_data["Type"])
