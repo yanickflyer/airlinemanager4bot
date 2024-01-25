@@ -21,16 +21,20 @@ class maintenance:
             get_id=air.find("button").attrs['onclick']
             get_id=re.search(r'id=[0-9]+',get_id).group()
             get_id=get_id.lstrip('id=')
-            
+            try:
+                wear = air.find_all("b",{"class","text-danger"})[0].string
+            except:
+                wear = air.find_all("b",{"class","text-success"})[1].string
             js_data = {
                 "Flight Hours":air.find("b").string,
-                "Hours to Check":air.find_all("b",{"class","text-success"})[0].string,
-                "Wear":air.find_all("b",{"class","text-success"})[1].string,
+                "Hours to Check":air.find_all("b")[1].string,
+                "Wear":air.find_all("b")[2].string,
                 "Status":air.find_all("span")[3].string,
                 "Reg":str(air.attrs['data-reg']).upper(),
                 "Type":str(air.attrs['data-type']).upper(),
                 "id":get_id
             }
+            print(js_data)
             # maintenance.AircraftCheck(js_data=js_data,retry=1)
     
     def AircraftCheck(js_data,retry):
@@ -51,7 +55,7 @@ class maintenance:
                 return
         # wear=js_data["Wear"]
         # wear=float(wear.replace("%",""))
-        # if (wear) >= 10.0:
+        # if (wear) >= 30.0:
         #     parameter={
         #             "mode":"do",
         #             "type":"repair",

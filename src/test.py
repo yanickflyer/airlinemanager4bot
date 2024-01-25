@@ -1,3 +1,3 @@
-from functions import actions
+from maintenance import maintenance
 
-actions.depart_all()
+maintenance.get_aircraft(10)
