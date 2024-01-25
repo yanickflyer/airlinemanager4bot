@@ -40,7 +40,7 @@ class actions:
                 }
                 resp=requests.post(auth.url+page, cookies=auth.session, params=parameter)
                 price=int(purchase)*(int(current)/1000)
-                print('Emergency FUEL Purchased 200000lbs for $'+str(price))
+                print('Emergency FUEL Purchased 200000lbs for $'+str(price)+".  Hold was at "+holding+" LBS")
             elif (int(current)>1000 and int(current)<=1250 and hold < 800000):
                 purchase="100000"
                 parameter={
@@ -49,9 +49,9 @@ class actions:
                 }
                 resp=requests.post(auth.url+page, cookies=auth.session, params=parameter)
                 price=int(purchase)*(int(current)/1000)
-                print('Purchased 100000lbs for $'+str(price))
+                print('Emergency FUEL Purchased 100000lbs for $'+str(price)+".  Hold was at "+holding+" LBS")
             else:
-                print("Emergency FUEL Fuel too expensive $"+current+"/1000lbs. Hold was at "+holding+" LBS")
+                print("Fuel too expensive $"+current+"/1000lbs.")
         except requests:
             print("Connection Lost for Purchasing FUEL. Retrying")
             if retry < 10:
