@@ -30,9 +30,9 @@ class maintenance:
                 "Type":str(air.attrs['data-type']).upper(),
                 "id":get_id
             }
-            maintenance.AircraftCheck(js_data=js_data,retry=1)
+            maintenance.AircraftCheck(js_data=js_data)
     
-    def AircraftCheck(js_data,retry):
+    def AircraftCheck(js_data):
         page="maint_plan_do.php"
         if js_data["Status"] == "At base":
             if int(int(js_data["Hours to Check"]) < 10):
