@@ -30,6 +30,24 @@ class actions:
                 resp=requests.post(auth.url+page, cookies=auth.session, params=parameter)
                 price=int(purchase)*(int(current)/1000)
                 print('Purchased 500000lbs for $'+str(price))
+            elif (int(current)>650 and int(current)<=1000):
+                purchase="200000"
+                parameter={
+                    "mode":"do",
+                    "amount":purchase
+                }
+                resp=requests.post(auth.url+page, cookies=auth.session, params=parameter)
+                price=int(purchase)*(int(current)/1000)
+                print('Purchased 500000lbs for $'+str(price))
+            elif (int(current)>1000 and int(current)<=1250):
+                purchase="200000"
+                parameter={
+                    "mode":"do",
+                    "amount":purchase
+                }
+                resp=requests.post(auth.url+page, cookies=auth.session, params=parameter)
+                price=int(purchase)*(int(current)/1000)
+                print('Purchased 500000lbs for $'+str(price))
             else:
                 print("Fuel too expensive $"+current+"/1000lbs")
         except requests:
