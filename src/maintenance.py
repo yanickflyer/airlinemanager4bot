@@ -35,7 +35,7 @@ class maintenance:
     def AircraftCheck(js_data,retry):
         page="maint_plan_do.php"
         if js_data["Status"] == "At base":
-            if int(int(js_data["Hours to Check"]) < 30):
+            if int(int(js_data["Hours to Check"]) < 10):
                 parameter={
                     "mode":"do",
                     "type":"check",
