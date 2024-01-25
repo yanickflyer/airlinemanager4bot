@@ -12,7 +12,8 @@ class actions:
             current=html_read.find("span",{"class": "text-danger"}).string
             holding=html_read.find("span",{"id": "holding"}).string
             current=current.lstrip("$ ").replace(",","")
-            holding=int(holding.replace(",",""))
+            holding=holding.replace(",","")
+            hold=int(holding)
             if (int(current)<=650 and int(current)>450):
                 purchase="250000"
                 parameter={
@@ -31,7 +32,7 @@ class actions:
                 resp=requests.post(auth.url+page, cookies=auth.session, params=parameter)
                 price=int(purchase)*(int(current)/1000)
                 print('Purchased 500000lbs for $'+str(price))
-            elif (int(current)>650 and int(current)<=1000 and holding < 1000000):
+            elif (int(current)>650 and int(current)<=1000 and hold < 1000000):
                 purchase="200000"
                 parameter={
                     "mode":"do",
@@ -40,7 +41,7 @@ class actions:
                 resp=requests.post(auth.url+page, cookies=auth.session, params=parameter)
                 price=int(purchase)*(int(current)/1000)
                 print('Emergency FUEL Purchased 200000lbs for $'+str(price))
-            elif (int(current)>1000 and int(current)<=1250 and holding < 800000):
+            elif (int(current)>1000 and int(current)<=1250 and hold < 800000):
                 purchase="100000"
                 parameter={
                     "mode":"do",
@@ -50,7 +51,7 @@ class actions:
                 price=int(purchase)*(int(current)/1000)
                 print('Purchased 100000lbs for $'+str(price))
             else:
-                print("Emergency FUEL Fuel too expensive $"+current+"/1000lbs. Hold was at "+holding)
+                print("Emergency FUEL Fuel too expensive $"+current+"/1000lbs. Hold was at "+holding+" LBS")
         except requests:
             print("Connection Lost for Purchasing FUEL. Retrying")
             if retry < 10:
