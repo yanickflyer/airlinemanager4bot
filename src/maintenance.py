@@ -34,7 +34,6 @@ class maintenance:
                 "Type":str(air.attrs['data-type']).upper(),
                 "id":get_id
             }
-            print(js_data)
             # maintenance.AircraftCheck(js_data=js_data,retry=1)
     
     def AircraftCheck(js_data,retry):
