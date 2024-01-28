@@ -52,15 +52,53 @@ class actions:
                 print('Emergency FUEL Purchased 100000lbs for $'+str(price)+".  Hold was at "+holding+" LBS")
             else:
                 print("Fuel too expensive $"+current+"/1000lbs.")
-        except requests:
+        except:
             print("Connection Lost for Purchasing FUEL. Retrying")
             if retry < 10:
                 retry+=1
                 actions.purchase_fuel(retry)
                 return
             else:
-                print("Max Number of Retries Reached. Will try again in 5 minutes")
+                print("Max Number of Retries Reached. Will try again in 30 minutes")
                 return
+    
+    def buy_quota(retry):
+        try:
+            page="co2.php"
+            resp=requests.get(auth.url+page, cookies=auth.session)
+            html_read=BeautifulSoup(resp.text,'html.parser')
+            holding=html_read.find("span",{"id": "holding"}).string
+            holding_int=int(holding.replace(',',''))
+            cost=int(html_read.find("span",{"id": "sumCost"}).string)
+            if (cost <= 120):
+                purchase="1000000"
+                parameter={
+                    "mode":"do",
+                    "amount":purchase
+                }
+                resp=requests.post(auth.url+page, cookies=auth.session, params=parameter)
+                price=int(purchase)*(int(cost)/1000)
+                print('Purchased 1000000 CO2 Quotas for $'+str(price))
+            elif (holding_int < 300000 and cost <= 150):
+                purchase="300000"
+                parameter={
+                    "mode":"do",
+                    "amount":purchase
+                }
+                resp=requests.post(auth.url+page, cookies=auth.session, params=parameter)
+                price=int(purchase)*(int(cost)/1000)
+                print('Emergency 300000 CO2 Quotas purchased for $'+str(price))
+
+        except:
+            print("Connection Lost for Purchasing CO2 Quota. Retrying")
+            if retry < 10:
+                retry+=1
+                actions.purchase_fuel(retry)
+                return
+            else:
+                print("Max Number of Retries Reached. Will try again in 30 minutes")
+                return 
+
     
     def depart_all(retry):
         page = "route_depart.php"
