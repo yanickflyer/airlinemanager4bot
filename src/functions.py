@@ -93,6 +93,8 @@ class actions:
                 resp=requests.post(auth.url+page, cookies=auth.session, params=parameter)
                 price=int(purchase)*(int(cost)/1000)
                 print('Emergency 300000 CO2 Quotas purchased for $'+str(price))
+            else:
+                print('CO2 Quota too expensive. Cost is at $'+cost)
 
         except:
             print("Connection Lost for Purchasing CO2 Quota. Retrying")
