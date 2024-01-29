@@ -14,6 +14,9 @@ class actions:
             current=current.lstrip("$ ").replace(",","")
             holding=holding.replace(",","")
             hold=int(holding)
+            if (hold>3200000):
+                print('No Need to buy FUEL. Hold is at '+holding+'LBS')
+                return
             if (int(current)<=650 and int(current)>450):
                 purchase="250000"
                 parameter={
@@ -70,6 +73,8 @@ class actions:
             holding=html_read.find("span",{"id": "holding"}).string
             holding_int=int(holding.replace(',',''))
             cost=int(html_read.find("span",{"id": "sumCost"}).string)
+            if (holding>2500000):
+                print("No Need to buy CO2 Quota. Hold is at "+holding+"Quotas")
             if (cost <= 120):
                 purchase="1000000"
                 parameter={
