@@ -74,7 +74,7 @@ class actions:
             holding_int=int(holding.replace(',',''))
             cost=int(html_read.find("span",{"id": "sumCost"}).string)
             if (holding_int>2500000):
-                print("No Need to buy CO2 Quota. Hold is at "+holding+"Quotas")
+                print("No Need to buy CO2 Quota. Hold is at "+holding+" Quotas")
                 return
             
             if (cost <= 120):
