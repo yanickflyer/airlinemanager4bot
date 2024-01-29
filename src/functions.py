@@ -96,7 +96,7 @@ class actions:
                 price=int(purchase)*(int(cost)/1000)
                 print('Emergency 300000 CO2 Quotas purchased for $'+str(price))
             else:
-                print('CO2 Quota too expensive. Cost is at $'+cost)
+                print('CO2 Quota too expensive. Cost is at $'+str(cost))
 
         except:
             print("Connection Lost for Purchasing CO2 Quota. Retrying")
