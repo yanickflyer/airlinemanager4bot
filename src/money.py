@@ -6,7 +6,8 @@ class money:
     def get_finance(retry):
         try:
             resp=requests.get(auth.url, cookies=auth.session)
-        except:
+        except requests.exceptions.HTTPError as errh:
+            print(errh.args[0]) 
             print("Connection Lost for Finances. Retrying")
             if retry < 10:
                 retry+=1
