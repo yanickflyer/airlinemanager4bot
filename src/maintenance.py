@@ -7,9 +7,9 @@ class maintenance:
         page="maint_plan.php"
         try:
             resp=requests.get(auth.url+page, cookies=auth.session)
-        except requests.exceptions.HTTPError as errh:
+        except requests.exceptions.RequestException as errh:
             print('FAILED to get list of aircraft for maintenance')
-            print(errh.args[0]) 
+            print(errh) 
             return
         html_read=BeautifulSoup(resp.text,'html.parser')
         ListView=html_read.find("div",{"id":"acListView"})
@@ -44,8 +44,8 @@ class maintenance:
                 }
                 try:
                     requests.post(auth.url+page,cookies=auth.session,params=parameter)
-                except requests.exceptions.HTTPError as errh:
-                    print(errh.args[0]) 
+                except requests.exceptions.RequestException as errh:
+                    print(errh) 
                     print('FAILED to plan A Check for '+js_data["Reg"])
                     return
                 print("A Check Scheduled for "+js_data["Reg"]+" "+js_data["Type"])
@@ -61,7 +61,7 @@ class maintenance:
             try:
                 requests.post(auth.url+page,cookies=auth.session,params=parameter)
                 print("Maintenance Scheduled for "+js_data["Reg"]+" "+js_data["Type"])
-            except requests.exceptions.HTTPError as errh:
+            except requests.exceptions.RequestException as errh:
                 print("FAILED to schedule Maintenance for "+js_data["Reg"])
-                print(errh.args[0])
+                print(errh)
                 return

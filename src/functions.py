@@ -55,8 +55,8 @@ class actions:
                 print('Emergency FUEL Purchased 100000lbs for $'+str(price)+".  Hold was at "+holding+" LBS")
             else:
                 print("Fuel too expensive $"+current+"/1000lbs.")
-        except requests.exceptions.HTTPError as errh:
-            print(errh.args[0])
+        except requests.exceptions.RequestException as errh:
+            print(errh)
             print("Connection Lost for Purchasing FUEL. Retrying")
             if retry < 10:
                 retry+=1
@@ -99,8 +99,8 @@ class actions:
             else:
                 print('CO2 Quota too expensive. Cost is at $'+str(cost))
 
-        except requests.exceptions.HTTPError as errh:
-            print(errh.args[0])
+        except requests.exceptions.RequestException as errh:
+            print(errh)
             print("Connection Lost for Purchasing CO2 Quota. Retrying")
             if retry < 10:
                 retry+=1
@@ -119,9 +119,9 @@ class actions:
             }
         try:
             resp=requests.post(auth.url+page, cookies=auth.session, params=parameter)
-        except requests.exceptions.HTTPError as errh:
+        except requests.exceptions.RequestException as errh:
             print("Connection Lost for Departing all Aircraft. Retrying")
-            print(errh.args[0])
+            print(errh)
             if retry < 10:
                 retry+=1
                 actions.depart_all(retry)
