@@ -7,9 +7,25 @@ class maintenance:
         page="maint_plan.php"
         try:
             resp=requests.get(auth.url+page, cookies=auth.session)
-        except requests.exceptions.RequestException as errh:
-            print('FAILED to get list of aircraft for maintenance')
-            print(errh) 
+        except requests.exceptions.HTTPError as errh:
+            print("FAILED to get list of aircraft for maintenance")
+            print("HTTP Error") 
+            print(errh.args[0])
+            return
+        except requests.exceptions.ReadTimeout as errrt:
+            print("FAILED to get list of aircraft for maintenance")
+            print("Time out")
+            print(errrt)
+            return
+        except requests.exceptions.ConnectionError as conerr:
+            print("FAILED to get list of aircraft for maintenance")
+            print("Connection error")
+            print(conerr)
+            return
+        except requests.exceptions.RequestException as errex:
+            print("FAILED to get list of aircraft for maintenance")
+            print("Exception request")
+            print(errex)
             return
         html_read=BeautifulSoup(resp.text,'html.parser')
         ListView=html_read.find("div",{"id":"acListView"})
@@ -61,7 +77,19 @@ class maintenance:
             try:
                 requests.post(auth.url+page,cookies=auth.session,params=parameter)
                 print("Maintenance Scheduled for "+js_data["Reg"]+" "+js_data["Type"])
-            except requests.exceptions.RequestException as errh:
+            except requests.exceptions.HTTPError as errh:
                 print("FAILED to schedule Maintenance for "+js_data["Reg"])
-                print(errh)
-                return
+                print("HTTP Error") 
+                print(errh.args[0]) 
+            except requests.exceptions.ReadTimeout as errrt:
+                print("FAILED to schedule Maintenance for "+js_data["Reg"])
+                print("Time out")
+                print(errrt)
+            except requests.exceptions.ConnectionError as conerr:
+                print("FAILED to schedule Maintenance for "+js_data["Reg"])
+                print("Connection error")
+                print(conerr)
+            except requests.exceptions.RequestException as errex:
+                print("FAILED to schedule Maintenance for "+js_data["Reg"])
+                print("Exception request")
+                print(errex)
