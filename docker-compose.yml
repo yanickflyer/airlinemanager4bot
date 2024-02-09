@@ -9,3 +9,4 @@ services:
     working_dir: /src
     env_file:
       - .env
+    restart: unless-stopped
