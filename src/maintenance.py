@@ -3,7 +3,7 @@ from session import auth
 from bs4 import BeautifulSoup
 
 class maintenance:
-    def get_aircraft(retry):
+    def get_aircraft():
         page="maint_plan.php"
         try:
             resp=requests.get(auth.url+page, cookies=auth.session)

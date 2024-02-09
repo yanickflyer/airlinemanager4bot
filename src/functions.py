@@ -4,7 +4,7 @@ from money import money
 from bs4 import BeautifulSoup
 
 class actions:
-    def purchase_fuel(retry):
+    def purchase_fuel():
         try:
             page = "fuel.php"
             resp=requests.get(auth.url+page, cookies=auth.session)
@@ -55,18 +55,32 @@ class actions:
                 print('Emergency FUEL Purchased 100000lbs for $'+str(price)+".  Hold was at "+holding+" LBS")
             else:
                 print("Fuel too expensive $"+current+"/1000lbs.")
-        except requests.exceptions.RequestException as errh:
-            print(errh)
+        except requests.exceptions.HTTPError as errh:
             print("Connection Lost for Purchasing FUEL. Retrying")
-            if retry < 10:
-                retry+=1
-                actions.purchase_fuel(retry)
-                return
-            else:
-                print("Max Number of Retries Reached. Will try again in 30 minutes")
-                return
+            print("HTTP Error") 
+            print(errh.args[0])
+            money.get_finance()
+            return
+        except requests.exceptions.ReadTimeout as errrt:
+            print("Connection Lost for Purchasing FUEL. Retrying")
+            print("Time out")
+            print(errrt)
+            money.get_finance()
+            return
+        except requests.exceptions.ConnectionError as conerr:
+            print("Connection Lost for Purchasing FUEL. Retrying")
+            print("Connection error")
+            print(conerr)
+            money.get_finance()
+            return
+        except requests.exceptions.RequestException as errex:
+            print("Connection Lost for Purchasing FUEL. Retrying")
+            print("Exception request")
+            print(errex)
+            money.get_finance()
+            return
     
-    def buy_quota(retry):
+    def buy_quota():
         try:
             page="co2.php"
             resp=requests.get(auth.url+page, cookies=auth.session)
@@ -99,19 +113,33 @@ class actions:
             else:
                 print('CO2 Quota too expensive. Cost is at $'+str(cost))
 
-        except requests.exceptions.RequestException as errh:
-            print(errh)
+        except requests.exceptions.HTTPError as errh:
             print("Connection Lost for Purchasing CO2 Quota. Retrying")
-            if retry < 10:
-                retry+=1
-                actions.purchase_fuel(retry)
-                return
-            else:
-                print("Max Number of Retries Reached. Will try again in 30 minutes")
-                return 
+            print("HTTP Error") 
+            print(errh.args[0])
+            actions.buy_quota()
+            return
+        except requests.exceptions.ReadTimeout as errrt:
+            print("Connection Lost for Purchasing CO2 Quota. Retrying")
+            print("Time out")
+            print(errrt)
+            actions.buy_quota()
+            return
+        except requests.exceptions.ConnectionError as conerr:
+            print("Connection Lost for Purchasing CO2 Quota. Retrying")
+            print("Connection error")
+            print(conerr)
+            actions.buy_quota()
+            return
+        except requests.exceptions.RequestException as errex:
+            print("Connection Lost for Purchasing CO2 Quota. Retrying")
+            print("Exception request")
+            print(errex)
+            actions.buy_quota()
+            return
 
     
-    def depart_all(retry):
+    def depart_all():
         page = "route_depart.php"
         parameter={
                 "mode":"all",
@@ -119,16 +147,30 @@ class actions:
             }
         try:
             resp=requests.post(auth.url+page, cookies=auth.session, params=parameter)
-        except requests.exceptions.RequestException as errh:
+        except requests.exceptions.HTTPError as errh:
             print("Connection Lost for Departing all Aircraft. Retrying")
-            print(errh)
-            if retry < 10:
-                retry+=1
-                actions.depart_all(retry)
-                return
-            else:
-                print("Max Number of Retries Reached. Will try again in 5 minutes")
-                return
+            print("HTTP Error") 
+            print(errh.args[0])
+            money.get_finance()
+            return
+        except requests.exceptions.ReadTimeout as errrt:
+            print("Connection Lost for Departing all Aircraft. Retrying")
+            print("Time out")
+            print(errrt)
+            money.get_finance()
+            return
+        except requests.exceptions.ConnectionError as conerr:
+            print("Connection Lost for Departing all Aircraft. Retrying")
+            print("Connection error")
+            print(conerr)
+            money.get_finance()
+            return
+        except requests.exceptions.RequestException as errex:
+            print("Connection Lost for Departing all Aircraft. Retrying")
+            print("Exception request")
+            print(errex)
+            money.get_finance()
+            return
             
         no_aircraft=re.search(r'\'No routes departed\'',resp.text)
         if no_aircraft:
