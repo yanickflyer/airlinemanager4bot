@@ -11,7 +11,7 @@ A bot that connects to a PHP Session of Airlines Manager 4 and automate some tas
 ✔️ Autobuy CO2 Quotas when price is low.
 ✔️ Automaintain Aircraft.
 ✔️ Automaintain Aircraft.
-✔️ Autolaunch Eco Marketing Campaign at 7h Everyday
+✔️ Autolaunch Eco Marketing Campaign at 8h Everyday
 
 ## How To Run
 Clone The Repository

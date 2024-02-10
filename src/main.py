@@ -10,7 +10,7 @@ thread1.start()
 thread2.start()
 
 scheduler = BackgroundScheduler()
-job = scheduler.add_job(marketing.eco_campaign,'cron', hours=7, minute=0, timezone="Indian/Mauritius")
+job = scheduler.add_job(marketing.eco_campaign,'cron', hours=8, minute=0, timezone="Indian/Mauritius")
 scheduler.start()
 
 
