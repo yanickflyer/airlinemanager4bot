@@ -1,3 +1,4 @@
-from maintenance import maintenance
+from marketing import marketing
 
-maintenance.get_aircraft(10)
+marketing.eco_campaign()
+
