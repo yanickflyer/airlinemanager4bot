@@ -40,6 +40,8 @@ class marketing:
         if check_active:
             print("Eco Campaign is already Active")
         else:
+            print("To Buy Eco Campaign")
+            return
             try:
                 parameter={
                         "type":"5",
