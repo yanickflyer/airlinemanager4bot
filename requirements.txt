@@ -1,8 +1,13 @@
+APScheduler==3.10.4
+backports.zoneinfo==0.2.1
 beautifulsoup4==4.12.3
 bs4==0.0.2
 certifi==2023.11.17
 charset-normalizer==3.3.2
 idna==3.6
+pytz==2024.1
 requests==2.31.0
+six==1.16.0
 soupsieve==2.5
+tzlocal==5.2
 urllib3==2.1.0
