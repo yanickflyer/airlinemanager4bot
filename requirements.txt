@@ -1,5 +1,7 @@
 APScheduler==3.10.4
-backports.zoneinfo==0.2.1
+# https://stackoverflow.com/questions/71712258/error-could-not-build-wheels-for-backports-zoneinfo-which-is-required-to-insta
+# https://pypi.org/project/backports.zoneinfo/
+backports.zoneinfo;python_version<"3.9" 
 beautifulsoup4==4.12.3
 bs4==0.0.2
 certifi==2023.11.17
