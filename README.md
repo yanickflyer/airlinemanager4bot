@@ -7,9 +7,13 @@ A bot that connects to a PHP Session of Airlines Manager 4 and automate some tas
 
 ## Features
 ✔️ Autodepartures.
+
 ✔️ Autobuy Fuel when price is low.
+
 ✔️ Autobuy CO2 Quotas when price is low.
+
 ✔️ Automaintain Aircraft (A Check + Wear > 30%)
+
 ✔️ Autolaunch Eco Marketing Campaign at 8h Everyday
 
 ## How To Run
