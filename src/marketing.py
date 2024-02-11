@@ -40,14 +40,15 @@ class marketing:
         if check_active:
             print("Eco Campaign is already Active")
         else:
-            print("To Buy Eco Campaign")
-            return
+            eco_price=html_read.find("button").string
             try:
                 parameter={
                         "type":"5",
-                        "mode":"do"
+                        "mode":"do",
+                        "c":"1"
                 }
                 resp=requests.post(auth.url+"marketing_new.php", cookies=auth.session,params=parameter)
+                print("Eco Campaign Bought for "+eco_price)
             except requests.exceptions.HTTPError as errh:
                 print("Connection Lost for Marketing. Retrying")
                 print("HTTP Error") 
