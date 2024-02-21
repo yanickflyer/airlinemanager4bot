@@ -35,7 +35,7 @@ class actions:
                 resp=requests.post(auth.url+page, cookies=auth.session, params=parameter)
                 price=int(purchase)*(int(current)/1000)
                 print('Purchased 750000lbs for $'+str(price))
-            elif (int(current)>650 and int(current)<=1000 and hold < 1000000):
+            elif (int(current)>650 and int(current)<=1000 and hold < 1500000):
                 purchase="300000"
                 parameter={
                     "mode":"do",
@@ -44,7 +44,7 @@ class actions:
                 resp=requests.post(auth.url+page, cookies=auth.session, params=parameter)
                 price=int(purchase)*(int(current)/1000)
                 print('Emergency FUEL Purchased 300000lbs for $'+str(price)+".  Hold was at "+holding+" LBS")
-            elif (int(current)>1000 and int(current)<=1250 and hold < 800000):
+            elif (int(current)>1000 and int(current)<=1250 and hold < 1000000):
                 purchase="150000"
                 parameter={
                     "mode":"do",
