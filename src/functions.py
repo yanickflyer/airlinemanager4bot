@@ -14,19 +14,10 @@ class actions:
             current=current.lstrip("$ ").replace(",","")
             holding=holding.replace(",","")
             hold=int(holding)
-            if (hold>2500000):
+            if (hold>3000000):
                 print('No Need to buy FUEL. Hold is at '+holding+'LBS')
                 return
             if (int(current)<=650 and int(current)>450):
-                purchase="250000"
-                parameter={
-                    "mode":"do",
-                    "amount":purchase
-                }
-                resp=requests.post(auth.url+page, cookies=auth.session, params=parameter)
-                price=int(purchase)*(int(current)/1000)
-                print('Purchased 250000lbs for $'+str(price))
-            elif (int(current)<=450):
                 purchase="500000"
                 parameter={
                     "mode":"do",
@@ -35,24 +26,33 @@ class actions:
                 resp=requests.post(auth.url+page, cookies=auth.session, params=parameter)
                 price=int(purchase)*(int(current)/1000)
                 print('Purchased 500000lbs for $'+str(price))
+            elif (int(current)<=450):
+                purchase="750000"
+                parameter={
+                    "mode":"do",
+                    "amount":purchase
+                }
+                resp=requests.post(auth.url+page, cookies=auth.session, params=parameter)
+                price=int(purchase)*(int(current)/1000)
+                print('Purchased 750000lbs for $'+str(price))
             elif (int(current)>650 and int(current)<=1000 and hold < 1000000):
-                purchase="200000"
+                purchase="300000"
                 parameter={
                     "mode":"do",
                     "amount":purchase
                 }
                 resp=requests.post(auth.url+page, cookies=auth.session, params=parameter)
                 price=int(purchase)*(int(current)/1000)
-                print('Emergency FUEL Purchased 200000lbs for $'+str(price)+".  Hold was at "+holding+" LBS")
+                print('Emergency FUEL Purchased 300000lbs for $'+str(price)+".  Hold was at "+holding+" LBS")
             elif (int(current)>1000 and int(current)<=1250 and hold < 800000):
-                purchase="100000"
+                purchase="150000"
                 parameter={
                     "mode":"do",
                     "amount":purchase
                 }
                 resp=requests.post(auth.url+page, cookies=auth.session, params=parameter)
                 price=int(purchase)*(int(current)/1000)
-                print('Emergency FUEL Purchased 100000lbs for $'+str(price)+".  Hold was at "+holding+" LBS")
+                print('Emergency FUEL Purchased 150000lbs for $'+str(price)+".  Hold was at "+holding+" LBS")
             else:
                 print("Fuel too expensive $"+current+"/1000lbs.")
         except requests.exceptions.HTTPError as errh:
