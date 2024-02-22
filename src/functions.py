@@ -17,7 +17,7 @@ class actions:
             if (hold>3000000):
                 print('No Need to buy FUEL. Hold is at '+holding+'LBS')
                 return
-            if (int(current)<=650 and int(current)>450):
+            if (int(current)<=750 and int(current)>450):
                 purchase="500000"
                 parameter={
                     "mode":"do",
@@ -35,7 +35,7 @@ class actions:
                 resp=requests.post(auth.url+page, cookies=auth.session, params=parameter)
                 price=int(purchase)*(int(current)/1000)
                 print('Purchased 750000lbs for $'+str(price))
-            elif (int(current)>650 and int(current)<=1000 and hold < 1500000):
+            elif (int(current)>750 and int(current)<=1000 and hold < 1500000):
                 purchase="300000"
                 parameter={
                     "mode":"do",
