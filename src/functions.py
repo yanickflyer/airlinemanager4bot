@@ -9,9 +9,9 @@ class actions:
             page = "fuel.php"
             resp=requests.get(auth.url+page, cookies=auth.session)
             html_read=BeautifulSoup(resp.text,'html.parser')
-            current=html_read.find("span",{"class": "text-danger"}).string
+            current=html_read.find("span",{"id": "sumCost"}).string
             holding=html_read.find("span",{"id": "holding"}).string
-            current=current.lstrip("$ ").replace(",","")
+            current=current.replace(",","")
             holding=holding.replace(",","")
             hold=int(holding)
             if (hold>3000000):
