@@ -37,5 +37,5 @@ class marketing:
                     "mode":"do",
                     "c":"1"
         }
-        resp = am4_url.send_req("marketing_new.php",parameter=parameter)
+        resp = am4_url.post_send_req("marketing_new.php",parameter=parameter)
         print("Eco Campaign Bought for "+eco_price)
